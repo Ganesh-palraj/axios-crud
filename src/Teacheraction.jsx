@@ -1,13 +1,11 @@
-import React, { useEffect, useState , useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Input, Button } from "reactstrap";
 import Context from "./Context";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-
 const Teacheraction = () => {
-
-    const contextData = useContext(Context);
-    console.log(contextData.usersData)
+  const contextData = useContext(Context);
+  console.log(contextData.usersData);
 
   const teacherInitialData = {
     avatar: "",
@@ -16,11 +14,12 @@ const Teacheraction = () => {
     schoolname: "",
   };
 
-  const [teacherFormValues, setTeacherFormValues] = useState(teacherInitialData);
+  const [teacherFormValues, setTeacherFormValues] =
+    useState(teacherInitialData);
 
   const nav = useNavigate();
 
-  const { id , isView } = useParams();
+  const { id, isView } = useParams();
 
   const { state } = useLocation();
   console.log(state);
@@ -35,12 +34,19 @@ const Teacheraction = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    setTeacherFormValues({ ...teacherFormValues, [e.target.name]: [e.target.value] });
+    setTeacherFormValues({
+      ...teacherFormValues,
+      [e.target.name]: [e.target.value],
+    });
   };
 
   const handleSubmit = () => {
-    contextData.addOrUpdateTeachers({ teacherFormValues , setTeacherFormValues , id , teacherInitialData })
-    
+    contextData.addOrUpdateTeachers({
+      teacherFormValues,
+      setTeacherFormValues,
+      id,
+      teacherInitialData,
+    });
   };
 
   return (
@@ -60,7 +66,7 @@ const Teacheraction = () => {
         <label htmlFor="name">Name</label>
         <Input
           type="text"
-          name="name" 
+          name="name"
           autoComplete="image"
           id="name"
           value={teacherFormValues.name}
@@ -100,7 +106,12 @@ const Teacheraction = () => {
           submit{" "}
         </Button>
 
-        <Button color="danger" id="teachercancel" className="actionButton" onClick={() => nav(-1)}>
+        <Button
+          color="danger"
+          id="teachercancel"
+          className="actionButton"
+          onClick={() => nav(-1)}
+        >
           cancel
         </Button>
       </form>
